@@ -3,40 +3,24 @@ import Square from "../SquareComponent/Square.js";
 import "./board.css"
 
 class Board extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            squares:Array(9).fill(null),
-            xIsNext:true,
-        }
-    }
-    handleClick(i){
-        const scuaresSlice=this.state.squares.slice();
-        scuaresSlice[i]=(this.state.xIsNext) ?"X":"O";
-        this.setState({
-            squares:scuaresSlice,
-            xIsNext:!this.state.xIsNext
-        });
-    }
+    
+
     
     renderSquare(i){
         return(  
             <Square 
-            onClick={() => this.handleClick(i)}
-            value={this.state.squares[i]}/>
+            onClick={() => this.props.onClick(i)}
+            value={this.props.squares[i]}/>
         );
     }
+    
 
     render(){
-        
-        const status = "Next player: " + (this.state.xIsNext ? "X":"O");
-        
+         
         return(
             <div>
-                <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}
-                    {console.log("ejecutando render return "+this.state.squares[1])}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </div>
